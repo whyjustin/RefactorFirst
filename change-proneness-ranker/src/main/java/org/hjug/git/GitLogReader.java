@@ -2,6 +2,10 @@ package org.hjug.git;
 
 import java.io.*;
 import java.util.*;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -34,6 +38,15 @@ public class GitLogReader implements RepositoryLogReader {
             repositoryBuilder = repositoryBuilder.setIndexFile(new File(gitIndexFileEnvVariable));
         }
         gitRepository = repositoryBuilder.build();
+        
+        try 
+        {
+            MessageDigest md5Digest = MessageDigest.getInstance("MD5");
+        } 
+        catch (NoSuchAlgorithmException ex) 
+        {
+        }
+
 
         return gitRepository;
     }
